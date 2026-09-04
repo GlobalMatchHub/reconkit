@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: reconkit
+  datasource:
+    url: jdbc:mysql://${RECONKIT_DB_HOST:127.0.0.1}:${RECONKIT_DB_PORT:3307}/reconkit?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&rewriteBatchedStatements=true
+    username: ${RECONKIT_DB_USER:reconkit}
+    password: ${RECONKIT_DB_PASSWORD:reconkit}
+    hikari:
+      maximum-pool-size: 16
+      pool-name: reconkit-pool
+  jpa:
+    open-in-view: false
+    hibernate:
+      # The schema belongs to Flyway. Letting Hibernate generate it means the indexes
+      # the matching passes depend on exist on a developer's laptop and nowhere else.
+      ddl-auto: none
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 500
+        order_inserts: true
+        order_updates: true
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+  servlet:
+    multipart:
+      max-file-size: 64MB
+      max-request-size: 64MB
+  jackson:
+    default-property-inclusion: non_null
+
+server:
+  port: 8080
+  error:
+    include-message: always
+
+reconkit:
+  jwt:
+    secret: ${RECONKIT_JWT_SECRET:reconkit-local-development-secret-key-change-me-please-32}
+    access-ttl-minutes: 30
+    refresh-ttl-days: 14
+  demo:
+    # Seeds a month of transactions with known defects planted in it. Never on by default.
+    enabled: ${RECONKIT_DEMO:false}
+    days: 30
+
+logging:
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %-5level [%X{requestId:-}] [%X{tenant:-}] %logger{28} - %msg%n"
+  level:
+    dev.sellerkit.reconkit: INFO
+    org.hibernate.SQL: WARN

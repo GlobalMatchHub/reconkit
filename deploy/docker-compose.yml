@@ -1,0 +1,26 @@
+# Local MySQL for development. Port 3307 so it cannot collide with an existing 3306.
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: reconkit-mysql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-time-zone=+09:00
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: reconkit
+      MYSQL_USER: reconkit
+      MYSQL_PASSWORD: reconkit
+    ports:
+      - "3307:3306"
+    volumes:
+      - reconkit-mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  reconkit-mysql:

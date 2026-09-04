@@ -1,0 +1,5 @@
+// Idempotent job runner: state machine + compensating saga.
+dependencies {
+    api project(':recon-domain')
+    implementation 'org.slf4j:slf4j-api'
+}

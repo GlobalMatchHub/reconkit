@@ -1,0 +1,5 @@
+// Fee arithmetic and settlement statement assembly.
+dependencies {
+    api project(':recon-domain')
+    implementation 'org.slf4j:slf4j-api'
+}

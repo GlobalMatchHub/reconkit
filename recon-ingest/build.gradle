@@ -1,0 +1,6 @@
+// CSV parsing and per-counterparty column mapping profiles.
+dependencies {
+    api project(':recon-domain')
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+}

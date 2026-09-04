@@ -1,0 +1,6 @@
+// The reconciliation engine. Talks to the outside world only through ports
+// declared in this module; adapters live in recon-app.
+dependencies {
+    api project(':recon-domain')
+    implementation 'org.slf4j:slf4j-api'
+}

@@ -1,0 +1,11 @@
+// Pure domain: entities, value objects, enums, policy records.
+// Deliberately free of Spring. Only the JPA annotation API is allowed so that
+// persistence mapping lives next to the model without dragging a container in.
+dependencies {
+    api 'jakarta.persistence:jakarta.persistence-api'
+    api 'jakarta.validation:jakarta.validation-api'
+    // Hibernate's @TenantId is how every query gets its tenant predicate.
+    // Annotation use only; no ORM runtime is pulled into the domain jar.
+    compileOnly 'org.hibernate.orm:hibernate-core'
+    compileOnly 'com.fasterxml.jackson.core:jackson-annotations'
+}
