@@ -8,3 +8,6 @@ dist/
 .idea/
 *.iml
 recon-app/src/main/resources/static/
+bin/
+.claude/
+*.tsbuildinfo
